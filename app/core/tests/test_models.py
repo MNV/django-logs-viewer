@@ -1,5 +1,8 @@
+from django.utils import timezone
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+
+from log import models as LogModels
 
 
 class ModelTests(TestCase):
@@ -37,3 +40,18 @@ class ModelTests(TestCase):
 
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
+
+    def test_log_str(self):
+        """Test the log string representation"""
+        log = LogModels.Log.objects.create(
+            time=timezone.now(),
+            level='warning',
+            message='Warning message body',
+            details={
+                'kwargs': {'k1': 'v1', 'k2': 'v2'},
+                'exec_time': timezone.now().isoformat(),
+                'traceback': ['line1', 'line2'],
+            }
+        )
+
+        self.assertEqual(str(log), log.level)
