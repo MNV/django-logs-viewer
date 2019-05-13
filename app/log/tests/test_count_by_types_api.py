@@ -12,13 +12,13 @@ from log import models as LogModels
 LOG_LEVEL_COUNT_URL = reverse('log:loglevelcount-list')
 
 
-class PrivateTagsApiTests(TestCase):
+class CountByTypesApiTests(TestCase):
     """Test the count by types API endpoint"""
 
     def setUp(self):
         self.client = APIClient()
 
-    def test_retrieve_tags(self):
+    def test_retrieve_logs(self):
         """Test retrieving logs"""
         LogModels.Log.objects.create(
             time=timezone.now(),
@@ -44,13 +44,14 @@ class PrivateTagsApiTests(TestCase):
 
         res = self.client.get(LOG_LEVEL_COUNT_URL)
 
-        tags = LogModels.LogLevelCount.objects.all().order_by('-count')
-        serializer = LogLevelCountSerializer(tags, many=True)
-        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        logs = LogModels.LogLevelCount.objects.all().order_by('-count')
+        serializer = LogLevelCountSerializer(logs, many=True)
         serializer_data = {
             'count': 2,
             'next': None,
             'previous': None,
             'results': serializer.data,
         }
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertEqual(res.data, serializer_data)
