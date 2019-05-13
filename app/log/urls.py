@@ -5,7 +5,8 @@ from log import views
 
 
 router = DefaultRouter()
-router.register('count-by-types', views.LogViewSet)
+router.register('count-by-types', views.CountByTypesViewSet)
+router.register('search-by-body', views.SearchByBodyViewSet)
 
 app_name = 'log'
 

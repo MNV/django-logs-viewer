@@ -47,4 +47,10 @@ class PrivateTagsApiTests(TestCase):
         tags = LogModels.LogLevelCount.objects.all().order_by('-count')
         serializer = LogLevelCountSerializer(tags, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        self.assertEqual(res.data, serializer.data)
+        serializer_data = {
+            'count': 2,
+            'next': None,
+            'previous': None,
+            'results': serializer.data,
+        }
+        self.assertEqual(res.data, serializer_data)
