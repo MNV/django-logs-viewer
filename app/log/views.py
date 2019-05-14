@@ -4,6 +4,8 @@ from rest_framework import viewsets, mixins, filters
 from log.models import Log, LogLevelCount
 from log import serializers
 
+import json
+
 
 class CountByTypesViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     """Logs list, aggregated by type"""
@@ -35,6 +37,8 @@ class SearchByFieldViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     def get_queryset(self):
         """Return objects"""
         kwargs = self.request.GET.get('kwargs', '')
+        if kwargs:
+            kwargs = json.loads(kwargs)
         exec_time = self.request.GET.get('exec_time', '')
         traceback = self.request.GET.get('traceback', '')
 
