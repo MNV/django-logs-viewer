@@ -9,7 +9,7 @@ from rest_framework.test import APIClient
 from log.serializers import LogLevelCountSerializer
 from log import models as LogModels
 
-LOG_LEVEL_COUNT_URL = reverse('log:loglevelcount-list')
+LOG_LEVEL_COUNT_URL = reverse('log:count-by-types-list')
 
 
 class CountByTypesApiTests(TestCase):

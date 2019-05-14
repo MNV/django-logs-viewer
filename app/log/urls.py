@@ -5,11 +5,24 @@ from log import views
 
 
 router = DefaultRouter()
-router.register('count-by-types', views.CountByTypesViewSet)
-router.register('search-by-body', views.SearchByBodyViewSet)
+router.register(
+    'count-by-types',
+    views.CountByTypesViewSet,
+    'count-by-types'
+)
+router.register(
+    'search-by-body',
+    views.SearchByBodyViewSet,
+    'search-by-body'
+)
+router.register(
+    'search-by-field',
+    views.SearchByFieldViewSet,
+    'search-by-field'
+)
 
 app_name = 'log'
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
 ]

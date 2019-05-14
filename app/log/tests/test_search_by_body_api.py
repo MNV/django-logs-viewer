@@ -8,7 +8,7 @@ from rest_framework.test import APIClient
 from log.serializers import SearchByBodySerializer
 from log import models as LogModels
 
-LOG_LIST_URL = reverse('log:log-list')
+LOG_LIST_URL = reverse('log:search-by-body-list')
 
 
 class SearchByBodyApiTests(TestCase):

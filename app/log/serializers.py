@@ -19,3 +19,12 @@ class SearchByBodySerializer(serializers.ModelSerializer):
         model = Log
         fields = ('id', 'time', 'level', 'message', 'details')
         read_only_Fields = ('id', 'time', 'level', 'message', 'details')
+
+
+class SearchByFieldSerializer(serializers.ModelSerializer):
+    """Serializer for SearchByBody object"""
+
+    class Meta:
+        model = Log
+        fields = ('id', 'time', 'level', 'message', 'details')
+        read_only_Fields = ('id', 'time', 'level', 'message', 'details')
